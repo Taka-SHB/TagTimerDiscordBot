@@ -7,7 +7,6 @@ from utils.Analyzer import Analyzer
 from utils.RecordFixer import RecordFixer, DeleteRecord, FixRecord
 import utils.CheckDB
 
-import sqlite3
 import datetime
 
 intents = discord.Intents.default()
@@ -16,7 +15,7 @@ intents.message_content = True
 with open("token.txt", "r") as f:
     token = f.readline()
 
-db_name = "TESTDB"
+db_name = "DEMODB"
 utils.CheckDB.check(db_name)
 Timer.DB_NAME = TagManager.DB_NAME = Analyzer.DB_NAME = RecordFixer.DB_NANE = db_name
 
