@@ -31,11 +31,12 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if message.content.startswith('$'):
-        reset_flag()
-        if Timer.IS_RUNNING:
-            await message.channel.send("申し訳ありません！　時間計測中はコマンドの入力を受け付けられません．/n計測は以下のボタンから終了できます．")
+        
+        if Timer.IS_RUNNING and (not message.content.startswith('$stop')):
+            await message.channel.send("申し訳ありません！　時間計測中はコマンドの入力を受け付けられません．\n計測は以下のボタンから終了できます．")
             await message.channel.send(view = StopButton())
             return
+        reset_flag()
         await bot.process_commands(message)
         return
 
@@ -50,6 +51,14 @@ async def timer(ctx):
         await ctx.send("現在のタグは【{}】です．\n準備が完了したらボタンを押してください．".format(TagManager.TAG_DICT[TagManager.CURRENT_ID]))
     Timer.CURRENT_ID = TagManager.CURRENT_ID
     await ctx.send(view = StartButton())
+
+@bot.command()
+async def stop(ctx):
+    if Timer.IS_RUNNING:
+        await ctx.send("計測を終了するには以下のボタンを押してください．")
+        await ctx.send(view = StopButton())
+    else :
+        await ctx.send("現在は計測していないようですね...")
 
 @bot.command()
 async def tag(ctx):

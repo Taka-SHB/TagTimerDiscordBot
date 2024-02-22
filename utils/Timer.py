@@ -26,8 +26,7 @@ class StartButton(discord.ui.View):
     @discord.ui.button(label="START!!", style=discord.ButtonStyle.success)
     async def start_timer(self, interaction, button):
         if not Timer.IS_RUNNING:
-          await interaction.response.send_message("時間の計測を開始しました！\n終了は下のボタンからお願いします．")
-          await interaction.channel.send(view = StopButton())
+          await interaction.response.send_message("時間の計測を開始しました！\n終了するには$stopを利用してください．")
           timerStart()
         else:
             await interaction.response.send_message("安心してください，現在計測中です！\n終了したいですか？　下のボタンで終了できます！")
@@ -39,17 +38,14 @@ class StopButton(discord.ui.View):
 
     @discord.ui.button(label="STOP", style=discord.ButtonStyle.gray)
     async def stop_timer(self, interaction, button):
-        if Timer.IS_RUNNING:
-          total = timerStop()
-          m, s = divmod(total, 60)
-          h, m = divmod(m, 60)
-          await interaction.response.send_message("計測を終了します．時間は{}時間{}分{}秒でした．\nお疲れさまでした！".format(h, m, s))
-          if not Timer.CURRENT_ID == "":
+        total = timerStop()
+        m, s = divmod(total, 60)
+        h, m = divmod(m, 60)
+        await interaction.response.send_message("計測を終了します．時間は{}時間{}分{}秒でした．\nお疲れさまでした！".format(h, m, s))
+        if not Timer.CURRENT_ID == "":
             record_time(total)
             Timer.REQUEST_CAPTION = True
             await interaction.channel.send(view = CaptionButton())
-        else:
-            await interaction.response.send_message("現在は計測していないようですね...")
 
 class CaptionButton(discord.ui.View):
     def __init__(self):

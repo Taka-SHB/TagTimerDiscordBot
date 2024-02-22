@@ -15,6 +15,7 @@ A timer that can record the measurement time for each tag. Also has simple analy
 現在ボットに実装されているコマンドは以下のとおりです．
 
 - [$timer](#timer)：時間の計測を行い，記録する
+- [$stop](#stop)：時間の計測を終了する
 - [$tag](#tag)：登録されているタグの一覧を表示する
 - [$set_tag](#set_tag)：記録や分析を行うタグを設定する
 - [$add_tag](#add_tag)：タグを追加する
@@ -34,12 +35,19 @@ A timer that can record the measurement time for each tag. Also has simple analy
 $timer
 ```
 時間計測を開始するためのボタンを送信します．
-計測を開始後，終了用のボタンを送信します．
+
+
+
+**注：時間計測中は全てのコマンドが無効化されます**
+
+### $stop
+```
+$stop
+```
+計測終了用のボタンを送信します．
 計測を終了すると，計測時間を送信するとともに，キャプションを追加するためのボタンを送信します．
 
 キャプション追加のボタンは，キャプションを追加するか，新たなコマンドを入力することで無効化されます．
-
-**注：時間計測中は全てのコマンドが無効化されます**
 
 ### $tag
 ```
