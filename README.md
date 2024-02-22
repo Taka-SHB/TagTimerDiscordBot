@@ -1,4 +1,4 @@
-# TigTimerDiscordBot
+# TagTimerDiscordBot
 
 A timer that can record the measurement time for each tag. Also has simple analysis functions
 
@@ -9,6 +9,14 @@ A timer that can record the measurement time for each tag. Also has simple analy
 - タグごとに，記録されている総時間や日ごとの合計時間を出力できる
 - 記録されている情報をCSV形式で出力できる
 - 記録されている情報からグラフを作成し出力できる
+
+## 使い方
+
+`main.py`と同じディレクトリに，botのトークンが一行目に書き込まれた`token.txt`を用意してください．`main.py`の`db_name`を適宜変更し，
+```
+python main.py
+```
+を実行するとbotが起動します．
 
 ## 機能一覧
 
@@ -28,7 +36,7 @@ A timer that can record the measurement time for each tag. Also has simple analy
 - [$csv_all](#csv_all)：記録されている全ての情報をCSVファイルで出力する
 - [$plot](#plot)：設定されているタグの計測記録をグラフにして画像で出力する
 - [$delete_record](#delete_record)：記録されている情報を削除する
-- $fix_record：記録されている情報を編集する
+- [$fix_record](#fix_record)：記録されている情報を編集する
 
 ### $timer
 ```
